@@ -1,0 +1,137 @@
+<div>
+  <div>
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Orders</mat-card-title>
+        <div class="table-responsive m-t-16">
+          <table mat-table [dataSource]="dataSource" class="w-100">
+            <!-- Position Column -->
+            <ng-container matColumnDef="order">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              ><mat-checkbox class="example-margin"><h6 class="mat-subtitle-1 f-s-14 f-w-600">Order</h6></mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex align-items-center">
+                  <div class="m-l-16">
+                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                      <mat-checkbox class="example-margin">{{ element.order }}</mat-checkbox>
+                    </h6>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Date
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.date }}
+              </td>
+            </ng-container>
+
+            <!-- Customer Column -->
+            <ng-container matColumnDef="customer">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Customer
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.customer }}
+              </td>
+            </ng-container>
+
+            <!-- Payment Status Column -->
+            <ng-container matColumnDef="paymentStatus">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Payment status
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <ng-template [ngIf]="element.paymentStatus == 'Paid'">
+                  <span
+                    class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.paymentStatus | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.paymentStatus == 'Pending'">
+                  <span
+                    class="bg-light-gray-100 text-gray-100 rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.paymentStatus | titlecase }}
+                  </span>
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Order Status Column -->
+            <ng-container matColumnDef="orderStatus">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Order Status
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <ng-template [ngIf]="element.orderStatus == 'Ready'">
+                  <span
+                    class="bg-warning text-white rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.orderStatus | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.orderStatus == 'Shipped'">
+                  <span
+                    class="bg-gray-100 text-white rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.orderStatus | titlecase }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="element.orderStatus == 'Received'">
+                  <span
+                    class="bg-accent text-white rounded f-w-600 p-6 p-y-4 f-s-12"
+                  >
+                    {{ element.orderStatus | titlecase }}
+                  </span>
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Total Column -->
+            <ng-container matColumnDef="total">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="f-w-600 mat-subtitle-1 f-s-14"
+              >
+                Total
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                ${{ element.total }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
